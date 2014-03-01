@@ -1,5 +1,5 @@
 %PML parameters
-npml=8;
+npml=20;
 ihx=zeros(ie,je);ihy=zeros(ie,je);
 gi2 = ones(1,ie);
 gi3 = ones(1,ie);
@@ -19,18 +19,18 @@ for i = 1:npml+1
     xd = npml;
     xxn = xnum/xd;
     xn = 0.33*(xxn^3);
-    gi2(i) = 1.0/(1.0+xn);
+    %gi2(i) = 1.0/(1.0+xn);
     gi2(ie-i+1) = 1.0/(1.0+xn);
-    gi3(i) = (1.0 - xn)/(1.0+xn);
+    %gi3(i) = (1.0 - xn)/(1.0+xn);
     gi3(ie-i+1) = (1.0 - xn)/(1.0+xn);
     
     xxn = (xnum - 0.5)/xd;
     xb = 0.25*(xxn^3);
-    fi1(i) = xn;
+    %fi1(i) = xn;
     fi1(ie-i) = xn;
-    fi2(i) = 1.0/(1.0+xn);
+    %fi2(i) = 1.0/(1.0+xn);
     fi2(ie-i) = 1.0/(1.0+xn);
-    fi3(i) = (1.0-xn)/(1.0 + xn);
+    %fi3(i) = (1.0-xn)/(1.0 + xn);
     fi3(ie-i) = (1.0-xn)/(1.0+xn);
 end
 for j = 1:npml+1
