@@ -1,24 +1,22 @@
-function plotmesh
+% plotmesh responsible of setting a formatted way to represent mesh
+% field 1=Er, 2=Ez, 3=Hp, 4=permittivity
+function plotmesh(field)
 
-global x y epsilon height coax_length backgroundeps inner_d outer_d teflon_p
+global x_dimension y_dimension cell_size
 
-%reset with bacground eps
-epsilon=ones(length(x),length(y))*backgroundeps;
-%set antenna
-epsilon(1:(1+inner_d),1:(height+coax_length))=0;
-epsilon((outer_d):length(x),1:(coax_length))=0;
-epsilon(1+inner_d:outer_d-1,1:(height+coax_length))=1/teflon_p;
+[x,y]=discretize_grid(x_dimension, y_dimension, cell_size);
 
-%imagesc(x,fliplr(y),epsilon);% flip the y to fit imagesc
-surf(y,x,epsilon);
+%surf(y,x,field(1:length(x), pmlwidth+1:length(y)+pmlwidth));
+surf(y,x,field);
 view(-90,90);
-xlabel('mm')
-ylabel('mm')
 grid minor;
 
+xlabel('z axis');
+ylabel('r axis');
+
 axis image;
+%colorbar;very slow
 %axis([0 y(end) 0 x(end)])
-title('epsilon')
 set(gca,'Units','pixel')
 a = get(gcf,'outerposition');
 set(gca, 'Position',[a(1)+100 170 a(3)-250 a(4)-320]);
